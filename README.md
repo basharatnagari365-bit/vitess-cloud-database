@@ -97,9 +97,11 @@ A **scalable, reliable, MySQL-compatible, cloud-native database** built with **V
 - **Monitoring:** Grafana + Prometheus
 - **Package Manager:** Helm
 
-## 📧 Contact
+## 👥 Authors
 
-**Basharat** — basharatnagari365@gmail.com
+- **Basharat Hussain**
+- **Sajad Ali**
+- **Syed Waqas Imam**
 
 ---
 
