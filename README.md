@@ -12,54 +12,48 @@ A **scalable, reliable, MySQL-compatible, cloud-native database** built with **V
 
 ## 🏗️ Architecture
 
-\`\`\`
-┌─────────────────────────────────────┐
-│         React Dashboard             │
-│     (Vitess Cluster Monitor)        │
-└──────────────┬──────────────────────┘
-               │ API Calls
-┌──────────────▼──────────────────────┐
-│       Node.js Backend (Express)     │
-└──────────────┬──────────────────────┘
-               │ MySQL Protocol
-┌──────────────▼──────────────────────┐
-│     VTGate (3 instances)            │
-│     SQL Router & Load Balancer      │
-└──────────┬──────────────────────────┘
-           │
-    ┌──────┼──────┬──────┐
-    ▼      ▼      ▼      ▼
-┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐
-│-40   │ │40-80 │ │80-c0 │ │c0-   │
-│PRIMARY│ │PRIMARY│ │PRIMARY│ │PRIMARY│
-│+2 REP│ │+2 REP│ │+2 REP│ │+2 REP│
-└──────┘ └──────┘ └──────┘ └──────┘
-    4 Shards, 12 Tablets (Hash-based)
-\`\`\`
+    React Dashboard (Vitess Cluster Monitor)
+              |
+              | API Calls
+              |
+    Node.js Backend (Express)
+              |
+              | MySQL Protocol
+              |
+      VTGate (3 instances)
+      SQL Router & Load Balancer
+              |
+    +---------+---------+---------+
+    |         |         |         |
+ Shard-40  Shard-80  Shard-c0  Shard-FF
+ PRIMARY   PRIMARY   PRIMARY   PRIMARY
+ +2 REP    +2 REP    +2 REP    +2 REP
+
+   4 Shards, 12 Tablets (Hash-based)
 
 ## ✨ Features
 
 | Feature | Description |
 |---------|-------------|
-| **🔀 Horizontal Sharding** | 4 shards, hash-based on `id` column |
-| **🔄 Auto Failover** | VTOrc per shard, automatic PRIMARY promotion |
-| **📦 Live Resharding** | 2→4 shards with zero downtime |
-| **🛡️ High Availability** | 3 tablets/shard + etcd HA (3 nodes) |
-| **☁️ Cloud Native** | Kubernetes K3s + Helm + Vitess Operator |
-| **🔌 MySQL Compatible** | Standard MySQL protocol, same SQL |
-| **📊 Monitoring** | Grafana + Prometheus + VTAdmin API |
-| **🖥️ Dashboard** | React frontend with real-time cluster monitoring |
+| 🔀 Horizontal Sharding | 4 shards, hash-based on `id` column |
+| 🔄 Auto Failover | VTOrc per shard, automatic PRIMARY promotion |
+| 📦 Live Resharding | 2 to 4 shards with zero downtime |
+| 🛡️ High Availability | 3 tablets/shard + etcd HA (3 nodes) |
+| ☁️ Cloud Native | Kubernetes K3s + Helm + Vitess Operator |
+| 🔌 MySQL Compatible | Standard MySQL protocol, same SQL |
+| 📊 Monitoring | Grafana + Prometheus + VTAdmin API |
+| 🖥️ Dashboard | React frontend with real-time cluster monitoring |
 
 ## 📊 Database Schema (E-Commerce)
 
 | Table | Rows | Description |
 |-------|------|-------------|
-| `customers` | 20 | Customer profiles |
-| `products` | 10 | Product catalog |
-| `orders` | 10 | Customer orders |
-| `order_items` | 12 | Line items per order |
-| `vendors` | 3 | Multi-vendor marketplace |
-| `categories` | 5 | Product categories |
+| customers | 20 | Customer profiles |
+| products | 10 | Product catalog |
+| orders | 10 | Customer orders |
+| order_items | 12 | Line items per order |
+| vendors | 3 | Multi-vendor marketplace |
+| categories | 5 | Product categories |
 
 ## 🚀 Quick Start
 
@@ -69,33 +63,30 @@ A **scalable, reliable, MySQL-compatible, cloud-native database** built with **V
 - kubectl configured
 
 ### Backend Setup
-\`\`\`bash
-cd backend
-npm install
-node server.js
-\`\`\`
+
+    cd backend
+    npm install
+    node server.js
 
 ### Frontend Setup
-\`\`\`bash
-cd frontend
-npm install
-npm start
-\`\`\`
+
+    cd frontend
+    npm install
+    npm start
 
 ### Connect to Vitess
-\`\`\`bash
-mysql -h 127.0.0.1 -P 13306 -u vitess -pvitess123
-\`\`\`
+
+    mysql -h 127.0.0.1 -P 13306 -u vitess -pvitess123
 
 ## 🖥️ Available Interfaces
 
 | Interface | URL | Purpose |
 |-----------|-----|---------|
-| **React Dashboard** | http://localhost:3000 | Cluster Monitor |
-| **VTGate Debug** | http://localhost:15099 | Query Routing |
-| **VTOrc UI** | http://localhost:16000 | Failover Status |
-| **Grafana** | http://localhost:3000 | Metrics Visualization |
-| **Prometheus** | http://localhost:9090 | Metrics Collection |
+| React Dashboard | http://localhost:3000 | Cluster Monitor |
+| VTGate Debug | http://localhost:15099 | Query Routing |
+| VTOrc UI | http://localhost:16000 | Failover Status |
+| Grafana | http://localhost:3000 | Metrics Visualization |
+| Prometheus | http://localhost:9090 | Metrics Collection |
 
 ## 🛠️ Tech Stack
 
@@ -108,7 +99,7 @@ mysql -h 127.0.0.1 -P 13306 -u vitess -pvitess123
 
 ## 📧 Contact
 
-**Basharat** — [basharatnagari365@gmail.com](mailto:basharatnagari365@gmail.com)
+**Basharat** — basharatnagari365@gmail.com
 
 ---
 
