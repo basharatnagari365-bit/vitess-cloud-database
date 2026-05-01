@@ -78,16 +78,6 @@ A **scalable, reliable, MySQL-compatible, cloud-native database** built with **V
 
     mysql -h 127.0.0.1 -P 13306 -u vitess -pvitess123
 
-## 🖥️ Available Interfaces
-
-| Interface | URL | Purpose |
-|-----------|-----|---------|
-| React Dashboard | http://localhost:3000 | Cluster Monitor |
-| VTGate Debug | http://localhost:15099 | Query Routing |
-| VTOrc UI | http://localhost:16000 | Failover Status |
-| Grafana | http://localhost:3000 | Metrics Visualization |
-| Prometheus | http://localhost:9090 | Metrics Collection |
-
 ## 🛠️ Tech Stack
 
 - **Database:** Vitess v21.0.6
